@@ -1,55 +1,62 @@
 ---
 import Square from "./Square.astro";
+import PlayerToken from "./PlayerToken.astro";
 ---
 
 <div class="board">
-    <div class="Top-row">
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-    </div>
-
+    <span class="dice">Dados</span>
     <div class="Bottom-row">
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
+        <Square price={0}>
+            <PlayerToken tokenUrl="/tokenPenguin.webp" />
+        </Square>
+        <Square price={1} />
+        <Square price={2} />
+        <Square price={3} />
+        <Square price={4} />
+        <Square price={5} />
+        <Square price={6} />
     </div>
-
     <div class="Left-row">
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
+        <Square price={7} />
+        <Square price={8} />
+        <Square price={9} />
+        <Square price={10} />
+        <Square price={11} />
+        <Square price={12} />
+        <Square price={13} />
+    </div>
+    <div class="Top-row">
+        <Square price={14} />
+        <Square price={15} />
+        <Square price={16} />
+        <Square price={17} />
+        <Square price={18} />
+        <Square price={19} />
+        <Square price={20} />
     </div>
 
     <div class="Right-row">
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
-        <Square price={100} />
+        <Square price={21} />
+        <Square price={22} />
+        <Square price={23} />
+        <Square price={24} />
+        <Square price={25} />
+        <Square price={26} />
+        <Square price={27} />
     </div>
 </div>
 
 <style>
+    .dice {
+        position: absolute;
+        top: 300px;
+        left: 300px;
+    }
     .board {
         width: 700px;
         height: 700px;
         margin: 72px auto;
-        border: 1px solid #000;
+
         position: relative;
     }
 
@@ -59,30 +66,35 @@ import Square from "./Square.astro";
     }
 
     .Top-row {
-        width: 100%;
+        width: calc(100% - 100px);
         height: 100px;
         top: 0;
         left: 0;
+        z-index: 1000;
     }
 
     .Bottom-row {
-        width: 100%;
+        width: calc(100% - 100px);
         height: 100px;
         bottom: 0;
-        left: 0;
+        left: 100px;
+        z-index: 1000;
+        flex-flow: row-reverse;
     }
 
     .Left-row {
         width: 100px;
-        height: 100%;
-        top: 0;
+        height: calc(100% - 100px);
+
+        top: 100px;
         left: 0;
         flex-direction: column;
+        flex-flow: column-reverse;
     }
 
     .Right-row {
         width: 100px;
-        height: 100%;
+        height: calc(100% - 100px);
         top: 0;
         right: 0;
         flex-direction: column;

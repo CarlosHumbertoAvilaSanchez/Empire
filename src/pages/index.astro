@@ -3,11 +3,65 @@ import Layout from "../layouts/Layout.astro";
 import Board from "../components/Board.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Empire">
 	<main>
 		<Board />
+		<button>
+			<span>Tirar dados</span>
+		</button>
 	</main>
 </Layout>
+
+<script>
+	const button = document.querySelector("button");
+	const dados = document.querySelector<HTMLSpanElement>(".dice");
+
+	button?.addEventListener("click", () => {
+		let diceResult = Math.floor(Math.random() * 6) + 1;
+		if (dados) dados.innerHTML = `${diceResult}`;
+		moveToken(diceResult);
+	});
+
+	const moveToken = async (diceResult: number) => {
+		const token = document.querySelector<HTMLDivElement>(".token");
+		const squares = document.querySelectorAll(".square");
+		let square = token?.parentElement as HTMLElement | null;
+
+		if (!token || !square || !squares) return;
+
+		const moveOneStep = () => {
+			return new Promise<void>((resolve) => {
+				setTimeout(() => {
+					token.style.animation = "none";
+					square?.removeChild(token);
+
+					const nextSquare =
+						squares[
+							[...squares].findIndex((s) => s === square) + 1
+						];
+					nextSquare?.appendChild(token);
+					square = nextSquare as HTMLElement;
+					resolve();
+				}, 800);
+			});
+		};
+
+		for (let i = 0; i < diceResult; i++) {
+			let index = [...squares].findIndex((s) => s === square);
+
+			if (index <= 6) {
+				token.style.animation = "tokenMoveLeft 0.8s forwards";
+			} else if (index > 6 && index < 14) {
+				token.style.animation = "tokenMoveUp 0.8s forwards";
+			} else if (index >= 14 && index < 21) {
+				token.style.animation = "tokenMoveRight 0.8s forwards";
+			} else if (index >= 21 && index < 28) {
+				token.style.animation = "tokenMoveDown 0.8s forwards";
+			}
+			await moveOneStep();
+		}
+	};
+</script>
 
 <style>
 	main {
@@ -15,5 +69,17 @@ import Board from "../components/Board.astro";
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
+		flex-direction: column;
+	}
+	main button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 10px 30px;
+		background-color: #0f0;
+		border-radius: 6px;
+		cursor: pointer;
+		border: none;
+		font-size: 1.3rem;
 	}
 </style>
