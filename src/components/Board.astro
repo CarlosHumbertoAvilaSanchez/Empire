@@ -1,0 +1,90 @@
+---
+import Square from "./Square.astro";
+---
+
+<div class="board">
+    <div class="Top-row">
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+    </div>
+
+    <div class="Bottom-row">
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+    </div>
+
+    <div class="Left-row">
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+    </div>
+
+    <div class="Right-row">
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+        <Square price={100} />
+    </div>
+</div>
+
+<style>
+    .board {
+        width: 700px;
+        height: 700px;
+        margin: 72px auto;
+        border: 1px solid #000;
+        position: relative;
+    }
+
+    .board div {
+        position: absolute;
+        display: flex;
+    }
+
+    .Top-row {
+        width: 100%;
+        height: 100px;
+        top: 0;
+        left: 0;
+    }
+
+    .Bottom-row {
+        width: 100%;
+        height: 100px;
+        bottom: 0;
+        left: 0;
+    }
+
+    .Left-row {
+        width: 100px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+    }
+
+    .Right-row {
+        width: 100px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        flex-direction: column;
+    }
+</style>

@@ -1,0 +1,18 @@
+---
+interface Props {
+    price: number;
+}
+
+const { price } = Astro.props;
+---
+
+<div>
+    <span>{price}</span>
+</div>
+
+<style>
+    div {
+        border: 1px solid #000;
+        flex: 1;
+    }
+</style>
